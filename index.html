@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коллега на связи</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0b0b1a 0%, #15162b 40%, #271537 70%, #000000 100%);
+            background-size: 300% 300%;
+            animation: gradientShift 16s ease-in-out infinite, fadeInBody 1.2s ease-out forwards;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+            opacity: 0; /* Плавное появление всей страницы */
+        }
+
+        /* Центральный блок с эффектом glassmorphism */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 32px 32px 36px;
+            background: rgba(15, 15, 35, 0.6);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            animation: fadeInUp 0.9s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Плавный переливающийся фон */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Плавное проявление всего контента */
+        @keyframes fadeInBody {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        /* Карточки с эффектами */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            position: relative;
+            padding: 18px 16px 20px;
+            border-radius: 18px;
+            background: rgba(20, 20, 45, 0.65); /* glassmorphism */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: perspective(900px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: conic-gradient(
+                from 0deg,
+                #667eea,
+                #9b5de5,
+                #f15bb5,
+                #fee440,
+                #00bbf9,
+                #00f5d4,
+                #667eea
+            );
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: neonBorder 7s linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes neonBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #b6b6c8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.8);
+            background: linear-gradient(135deg, #7f5df5 0%, #9b5de5 100%);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Декоративные элементы */
+        .decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 10%;
+            right: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Секция контактов */
+        .contact-section-wrapper {
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 28px;
+            padding: 22px 24px 26px;
+            border-radius: 22px;
+            background: rgba(15, 15, 35, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .contact-subtitle {
+            font-size: 0.98rem;
+            color: #b0b0c5;
+            margin-bottom: 18px;
+        }
+
+        .contact-phone-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 34px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: radial-gradient(circle at 0% 0%, #00f5d4, #00bbf9 45%, #667eea 100%);
+            box-shadow:
+                0 0 20px rgba(0, 245, 212, 0.4),
+                0 0 40px rgba(0, 187, 249, 0.35);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+        }
+
+        .contact-phone-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-phone-btn::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            border: 2px solid rgba(255, 255, 255, 0.45);
+            opacity: 0.8;
+        }
+
+        .contact-phone-btn:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow:
+                0 0 25px rgba(0, 245, 212, 0.55),
+                0 0 55px rgba(102, 126, 234, 0.6);
+        }
+
+        .contact-phone-icon {
+            font-size: 1.4rem;
+        }
+
+        .contact-phone-number {
+            letter-spacing: 0.04em;
+        }
+
+        .contact-hint {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #8c8ca5;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 20px rgba(0, 245, 212, 0.4),
+                    0 0 40px rgba(0, 187, 249, 0.35);
+            }
+            50% {
+                transform: scale(1.04);
+                box-shadow:
+                    0 0 30px rgba(0, 245, 212, 0.7),
+                    0 0 65px rgba(102, 126, 234, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow:
+                    0 0 20px rgba(0, 245, 212, 0.4),
+                    0 0 40px rgba(0, 187, 249, 0.35);
+            }
+        }
+
+        .contact-phone-btn--pulsing {
+            animation: pulseGlow 1.8s ease-in-out infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 26px 20px 30px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 14px;
+                margin-bottom: 28px;
+            }
+
+            .card {
+                padding: 16px 14px 18px;
+            }
+
+            .btn {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+
+            .contact-section {
+                padding: 18px 18px 22px;
+            }
+
+            .contact-title {
+                font-size: 1.15rem;
+            }
+
+            .contact-phone-btn {
+                width: 100%;
+                max-width: 320px;
+                padding: 14px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+    
+    <div class="container">
+        <h1>Коллега на связи</h1>
+
+        <div class="cards">
+            <div class="card tilt-card">
+                <div class="card-inner">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-title">Сотрудничество</div>
+                    <div class="card-text">Гибко подстраиваюсь под процессы команды и помогаю выстроить комфортное взаимодействие.</div>
+                </div>
+            </div>
+
+            <div class="card tilt-card">
+                <div class="card-inner">
+                    <div class="card-icon">💡</div>
+                    <div class="card-title">Идеи и архитектура</div>
+                    <div class="card-text">Предлагаю решения, думаю о масштабируемости и поддерживаемости кода.</div>
+                </div>
+            </div>
+
+            <div class="card tilt-card">
+                <div class="card-inner">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-title">Результат</div>
+                    <div class="card-text">Довожу задачи до конца и делаю упор на практическую ценность для продукта.</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="description">
+            Готов к сотрудничеству и совместной работе над проектами. 
+            Всегда открыт для новых идей и интересных задач.
+        </p>
+        <a href="#" class="btn" onclick="alert('Спасибо за интерес! Скоро здесь будет больше информации.'); return false;">
+            <span>Узнать больше</span>
+        </a>
+
+        <div class="contact-section-wrapper">
+            <section class="contact-section" id="contact">
+                <h2 class="contact-title">Связаться со мной</h2>
+                <p class="contact-subtitle">Если хотите обсудить проект или сотрудничество — просто нажмите на кнопку ниже.</p>
+
+                <a href="tel:+70000000000" class="contact-phone-btn contact-phone-btn--pulsing" id="contactPhoneBtn">
+                    <span class="contact-phone-icon">📞</span>
+                    <span class="contact-phone-number">+79110743258</span>
+                </a>
+
+                <div class="contact-hint">Клик по кнопке откроет стандартное приложение для звонка на вашем устройстве.</div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Простой тилт‑эффект для карточек
+        const cards = document.querySelectorAll('.tilt-card');
+
+        cards.forEach(card => {
+            const maxRotate = 10; // максимальный угол поворота в градусах
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateY = ((x - centerX) / centerX) * maxRotate;
+                const rotateX = (-(y - centerY) / centerY) * maxRotate;
+
+                card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
+                card.style.boxShadow = `0 18px 45px rgba(0, 0, 0, 0.7)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+                card.style.boxShadow = '0 14px 40px rgba(0, 0, 0, 0.55)';
+            });
+        });
+
+        // Лёгкий отклик кнопки телефона при клике
+        const contactPhoneBtn = document.getElementById('contactPhoneBtn');
+        if (contactPhoneBtn) {
+            contactPhoneBtn.addEventListener('click', () => {
+                contactPhoneBtn.classList.remove('contact-phone-btn--pulsing');
+                contactPhoneBtn.style.transform = 'scale(0.97)';
+                setTimeout(() => {
+                    contactPhoneBtn.style.transform = '';
+                    contactPhoneBtn.classList.add('contact-phone-btn--pulsing');
+                }, 150);
+            });
+        }
+    </script>
+</body>
+</html>
