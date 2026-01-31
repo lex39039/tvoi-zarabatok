@@ -289,224 +289,85 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px 34px;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #ffffff;
-            background: radial-gradient(circle at 0% 0%, #00f5d4, #00bbf9 45%, #667eea 100%);
-            box-shadow:
-                0 0 20px rgba(0, 245, 212, 0.4),
-                0 0 40px rgba(0, 187, 249, 0.35);
-            position: relative;
-            overflow: hidden;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #00bbf9 0%, #00f5d4 100%);
+            color: #000;
             text-decoration: none;
-            transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
         }
-
-        .contact-phone-btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-phone-btn::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            border: 2px solid rgba(255, 255, 255, 0.45);
-            opacity: 0.8;
-        }
-
+        
         .contact-phone-btn:hover {
-            transform: translateY(-1px) scale(1.02);
-            box-shadow:
-                0 0 25px rgba(0, 245, 212, 0.55),
-                0 0 55px rgba(102, 126, 234, 0.6);
-        }
-
-        .contact-phone-icon {
-            font-size: 1.4rem;
-        }
-
-        .contact-phone-number {
-            letter-spacing: 0.04em;
-        }
-
-        .contact-hint {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: #8c8ca5;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 20px rgba(0, 245, 212, 0.4),
-                    0 0 40px rgba(0, 187, 249, 0.35);
-            }
-            50% {
-                transform: scale(1.04);
-                box-shadow:
-                    0 0 30px rgba(0, 245, 212, 0.7),
-                    0 0 65px rgba(102, 126, 234, 0.7);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow:
-                    0 0 20px rgba(0, 245, 212, 0.4),
-                    0 0 40px rgba(0, 187, 249, 0.35);
-            }
-        }
-
-        .contact-phone-btn--pulsing {
-            animation: pulseGlow 1.8s ease-in-out infinite;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .description {
-                font-size: 1rem;
-            }
-
-            .container {
-                padding: 26px 20px 30px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-                gap: 14px;
-                margin-bottom: 28px;
-            }
-
-            .card {
-                padding: 16px 14px 18px;
-            }
-
-            .btn {
-                padding: 14px 32px;
-                font-size: 1rem;
-            }
-
-            .contact-section {
-                padding: 18px 18px 22px;
-            }
-
-            .contact-title {
-                font-size: 1.15rem;
-            }
-
-            .contact-phone-btn {
-                width: 100%;
-                max-width: 320px;
-                padding: 14px 24px;
-            }
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
         }
     </style>
 </head>
 <body>
     <div class="decoration decoration-1"></div>
     <div class="decoration decoration-2"></div>
-    
+
     <div class="container">
         <h1>Коллега на связи</h1>
+        <p class="description">Создаем современные цифровые решения. Каждая деталь имеет значение.</p>
 
         <div class="cards">
-            <div class="card tilt-card">
-                <div class="card-inner">
-                    <div class="card-icon">🤝</div>
-                    <div class="card-title">Сотрудничество</div>
-                    <div class="card-text">Гибко подстраиваюсь под процессы команды и помогаю выстроить комфортное взаимодействие.</div>
-                </div>
-            </div>
-
-            <div class="card tilt-card">
-                <div class="card-inner">
-                    <div class="card-icon">💡</div>
-                    <div class="card-title">Идеи и архитектура</div>
-                    <div class="card-text">Предлагаю решения, думаю о масштабируемости и поддерживаемости кода.</div>
-                </div>
-            </div>
-
-            <div class="card tilt-card">
+            <div class="card">
                 <div class="card-inner">
                     <div class="card-icon">🚀</div>
-                    <div class="card-title">Результат</div>
-                    <div class="card-text">Довожу задачи до конца и делаю упор на практическую ценность для продукта.</div>
+                    <div class="card-title">Скорость</div>
+                    <div class="card-text">Быстрая загрузка и работа.</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-icon">💎</div>
+                    <div class="card-title">Дизайн</div>
+                    <div class="card-text">Современный стиль.</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-title">Логика</div>
+                    <div class="card-text">Продуманные системы.</div>
                 </div>
             </div>
         </div>
 
-        <p class="description">
-            Готов к сотрудничеству и совместной работе над проектами. 
-            Всегда открыт для новых идей и интересных задач.
-        </p>
-        <a href="#" class="btn" onclick="alert('Спасибо за интерес! Скоро здесь будет больше информации.'); return false;">
-            <span>Узнать больше</span>
-        </a>
+        <a href="#" class="btn"><span>Подробнее</span></a>
 
         <div class="contact-section-wrapper">
-            <section class="contact-section" id="contact">
-                <h2 class="contact-title">Связаться со мной</h2>
-                <p class="contact-subtitle">Если хотите обсудить проект или сотрудничество — просто нажмите на кнопку ниже.</p>
-
-                <a href="tel:+70000000000" class="contact-phone-btn contact-phone-btn--pulsing" id="contactPhoneBtn">
-                    <span class="contact-phone-icon">📞</span>
-                    <span class="contact-phone-number">+79110743258</span>
+            <div class="contact-section">
+                <div class="contact-title">Связаться со мной</div>
+                <div class="contact-subtitle">Готов обсудить ваш проект прямо сейчас</div>
+                
+                <a href="tel:+79110743258" class="contact-phone-btn">
+                    <span>📞</span> +7 (911) 074-32-58
                 </a>
-
-                <div class="contact-hint">Клик по кнопке откроет стандартное приложение для звонка на вашем устройстве.</div>
-            </section>
+            </div>
         </div>
     </div>
 
     <script>
-        // Простой тилт‑эффект для карточек
-        const cards = document.querySelectorAll('.tilt-card');
-
-        cards.forEach(card => {
-            const maxRotate = 10; // максимальный угол поворота в градусах
-
+        // Эффект 3D для карточек
+        document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-
+                const maxRotate = 10;
                 const rotateY = ((x - centerX) / centerX) * maxRotate;
                 const rotateX = (-(y - centerY) / centerY) * maxRotate;
-
                 card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
-                card.style.boxShadow = `0 18px 45px rgba(0, 0, 0, 0.7)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)';
-                card.style.boxShadow = '0 14px 40px rgba(0, 0, 0, 0.55)';
             });
         });
-
-        // Лёгкий отклик кнопки телефона при клике
-        const contactPhoneBtn = document.getElementById('contactPhoneBtn');
-        if (contactPhoneBtn) {
-            contactPhoneBtn.addEventListener('click', () => {
-                contactPhoneBtn.classList.remove('contact-phone-btn--pulsing');
-                contactPhoneBtn.style.transform = 'scale(0.97)';
-                setTimeout(() => {
-                    contactPhoneBtn.style.transform = '';
-                    contactPhoneBtn.classList.add('contact-phone-btn--pulsing');
-                }, 150);
-            });
-        }
     </script>
 </body>
 </html>
